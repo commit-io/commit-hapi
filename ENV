@@ -1,0 +1,8 @@
+export HOST=localhost
+export BASE_URL=http://localhost:8000
+export GITHUB_CLIENT_ID=066c297580e4393074a1
+export GITHUB_CLIENT_SECRET=f57db7d70550257224ca4145aebed920b2112d8e
+export GITHUB_AUTH_REDIRECT_URL=/githubauth
+export PORT=8000
+export JWT_SECRET=uGi2x4jce9VRQ8bx6l9xqcjlrFxG5Cq673yzuaY3RTTyEJvarZzEtkPAHJSJy9b
+export MONGO_HOST=mongodb://localhost:27017/commit

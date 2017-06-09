@@ -1,0 +1,29 @@
+{
+  "name": "gamificode",
+  "version": "1.0.0",
+  "description": "Awesome gamification app for developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icaroharry/gamificode.git"
+  },
+  "author": "Ícaro Harry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icaroharry/gamificode/issues"
+  },
+  "homepage": "https://github.com/icaroharry/gamificode#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "co": "^4.6.0",
+    "github": "^9.2.0",
+    "hapi": "^16.1.1",
+    "hapi-auth-github": "^2.0.0",
+    "jsonwebtoken": "^7.4.0",
+    "mongodb": "^2.2.26",
+    "octonode": "^0.7.13"
+  }
+}
