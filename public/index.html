@@ -12,11 +12,11 @@
         <md-card flex="30" ng-repeat="repo in repos">
           <md-card-title>
             <md-card-title-text>
-              <span class="md-headline">[[repo.name]]</span>
-              <span class="md-subhead">[[repo.full_name]]</span>
+              <span class="md-headline">{{repo.name}}</span>
+              <span class="md-subhead">{{repo.full_name}}</span>
             </md-card-title-text>
             <md-card-title-media>
-              <img ng-src="[[repo.owner.avatar_url]]" style="height: 100px; width: 100px;">
+              <img ng-src="{{repo.owner.avatar_url}}" style="height: 100px; width: 100px;">
             </md-card-title-media>
           </md-card-title>
           <md-card-actions layout="row" layout-align="end center">
@@ -42,21 +42,10 @@
     /**
      * You must include the dependency on 'ngMaterial'
      */
-    angular.module('CommitApp', ['ngMaterial'])
-      .config(function($interpolateProvider) {
-        $interpolateProvider.startSymbol('[[');
-        $interpolateProvider.endSymbol(']]');
-      }).controller('RepoCtrl', function($scope, $http) {
-        $http({
-          method: 'GET',
-          url: 'http://localhost:8000/repos'
-        }).then(function (response) {
-          console.log(response.data.data);
-          $scope.repos = response.data.data;
-        });
-      });
+    angular.module('CommitApp', ['ngMaterial']);
 
   </script>
+  <script type="text/javascript" src="/controllers/RepoController.js"></script>
 
 </body>
 </html>

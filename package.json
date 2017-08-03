@@ -19,10 +19,12 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "co": "^4.6.0",
+    "ejs": "^2.5.7",
     "github": "^9.2.0",
     "handlebars": "^4.0.10",
     "hapi": "^16.1.1",
     "hapi-auth-github": "^2.0.0",
+    "inert": "^4.2.1",
     "jsonwebtoken": "^7.4.0",
     "moment": "^2.18.1",
     "mongodb": "^2.2.26",

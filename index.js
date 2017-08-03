@@ -1,6 +1,7 @@
 'use strict';
 
 const hapi = require('hapi');
+const inert = require('inert');
 const server = new hapi.Server();
 const githubHandler = require('./handlers/github');
 const hapiGithub = require('hapi-auth-github');
@@ -10,6 +11,8 @@ server.connection({
   host: process.env.HOST,
   port: Number(process.env.PORT)
 });
+
+server.register(inert, () => {});
 
 server.register([{
   register: hapiGithub,
@@ -22,11 +25,24 @@ server.register([{
 server.register(require('vision'), (err) => {
   server.views({
     engines: {
-      html: require('handlebars')
+      html: require('ejs')
     },
-    relativeTo: `${__dirname}`,
-    path: 'templates'
+    relativeTo: __dirname,
+    path: 'public',
+    isCached: false
   });
+});
+
+server.route({
+  method: 'GET',
+  path: '/{filename*}',
+  handler: {
+    directory: {
+      path: `${__dirname}/public`,
+      listing: false,
+      index: false
+    }
+  }
 });
 
 server.route({
