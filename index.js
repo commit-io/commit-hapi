@@ -11,12 +11,6 @@ server.connection({
   port: Number(process.env.PORT)
 });
 
-server.start((err) => {
-  if(err) throw err;
-
-  console.log(`Server running at: ${server.info.uri}`);
-});
-
 server.register([{
   register: hapiGithub,
   options: {
@@ -24,6 +18,16 @@ server.register([{
     SCOPE: 'repo'
   }
 }], (err) => { if(err) throw err; });
+
+server.register(require('vision'), (err) => {
+  server.views({
+    engines: {
+      html: require('handlebars')
+    },
+    relativeTo: `${__dirname}`,
+    path: 'templates'
+  });
+});
 
 server.route({
   method: 'GET',
@@ -38,11 +42,25 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/commits',
+  path: '/repo',
   handler: async (req, reply) => {
-    let commits = await githubApi.getCommits();
-    console.log(commits);
+    reply.view('index', {title: 'test'});
   }
+});
+
+server.route({
+  method: 'GET',
+  path: '/repos',
+  handler: async (req, reply) => {
+    let commits = await githubApi.getAllRepos();
+    reply(commits);
+  }
+});
+
+server.start((err) => {
+  if(err) throw err;
+
+  console.log(`Server running at: ${server.info.uri}`);
 });
 
 module.exports = server;

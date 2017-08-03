@@ -14,6 +14,31 @@ const authenticate = (token) => {
   });
 };
 
+const getOrgRepos = async () => {
+  try {
+    let orgs = await github.users.getOrgs({});
+
+    let orgRepos = await Promise.all(orgs.data.map(async (org) => {
+      return (await github.repos.getForOrg({
+        org: org.login
+      })).data.map(orgRepos => orgRepos);
+    }));
+
+    return orgRepos;
+  } catch(err) {
+    console.log(err);
+  }
+};
+
+const getAllRepos = async () => {
+  try {
+    let repos = await github.repos.getAll({});
+    return repos;
+  } catch(err) {
+    console.log(err);
+  }
+};
+
 const getCommits = async () => {
   try {
     let orgs = await github.users.getOrgs({});
@@ -26,13 +51,8 @@ const getCommits = async () => {
       repo: repos.data[2].name,
       since: moment().weekday(-7).format()
     };
-    console.log(obj);
     let commits = await github.repos.getCommits(obj);
-
-    console.log(commits);
-    // console.log(moment().weekday(-7).format());
-    // // console.log(orgs);
-    // console.log(repos.data[0].owner);
+    return commits;
   } catch(err) {
     console.log(err);
   }
@@ -40,5 +60,7 @@ const getCommits = async () => {
 
 module.exports = {
   authenticate,
-  getCommits
+  getCommits,
+  getAllRepos,
+  getOrgRepos
 };

@@ -23,7 +23,7 @@ module.exports = async function githubHandler(request, reply, tokens, profile) {
     githubApi.authenticate(tokens.access_token);
 
     // reply to client with a view
-    return reply.redirect('/commits')
+    return reply.redirect('/repo')
       .state('token', token); // see: http://hapijs.com/tutorials/cookies
   } else {
     return reply("Sorry, something went wrong, please try again.").code(401);
