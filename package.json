@@ -23,6 +23,7 @@
     "hapi": "^16.1.1",
     "hapi-auth-github": "^2.0.0",
     "jsonwebtoken": "^7.4.0",
+    "moment": "^2.18.1",
     "mongodb": "^2.2.26",
     "octonode": "^0.7.13"
   }
