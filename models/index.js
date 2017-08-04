@@ -14,6 +14,18 @@ const insertUser = async (user) => {
   }
 };
 
+const insertRepo = async (repo) => {
+  try {
+    let db = await mongo.MongoClient.connectAsync(process.env.MONGO_HOST);
+    const repos = db.collection('repos');
+    let result = await repos.insertAsync(repo);
+    db.close();
+  } catch(err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
-  insertUser
+  insertUser,
+  insertRepo
 };

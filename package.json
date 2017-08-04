@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/icaroharry/gamificode#readme",
   "dependencies": {
+    "bell": "^8.7.0",
     "bluebird": "^3.5.0",
     "co": "^4.6.0",
     "ejs": "^2.5.7",

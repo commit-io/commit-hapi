@@ -5,7 +5,9 @@ const inert = require('inert');
 const server = new hapi.Server();
 const githubHandler = require('./handlers/github');
 const hapiGithub = require('hapi-auth-github');
+
 const githubApi = require('./githubApi');
+const RepoController = require('./controllers/RepoController');
 
 server.connection({
   host: process.env.HOST,
@@ -58,6 +60,19 @@ server.route({
 
 server.route({
   method: 'GET',
+  path: '/slack',
+  handler: (req, reply) => {
+		let url = `https://slack.com/oauth/authorize?client_id=${process.env.SLACK_CLIENT_ID}`+
+      `&scope=bot channels:history chat:write:bot`+
+      `&redirect_uri=${process.env.BASE_URL + process.env.SLACK_AUTH_REDIRECT_URL}`;
+		let src = 'https://success.highfive.com/hc/en-us/article_attachments/202056963/slack-logo.jpg';
+		let btn = `<a href="${url}"><img src="${src}" alt="Login With Slack"></a>`;
+    reply(btn);
+  }
+});
+
+server.route({
+  method: 'GET',
   path: '/repo',
   handler: async (req, reply) => {
     reply.view('index', {title: 'test'});
@@ -71,6 +86,12 @@ server.route({
     let commits = await githubApi.getAllRepos();
     reply(commits);
   }
+});
+
+server.route({
+  method: 'POST',
+  path: '/repos',
+  handler: RepoController.insertRepo
 });
 
 server.start((err) => {
